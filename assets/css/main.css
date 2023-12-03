@@ -3248,6 +3248,16 @@ input, select, textarea {
 				height: 100vh;
 			}
 
+			#wrapper > .bg video {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				z-index: -1;
+			}
+
 		#wrapper.fade-in:before {
 			pointer-events: none;
 			-moz-transition: opacity 1s ease-in-out;
