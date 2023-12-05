@@ -40,17 +40,28 @@
             <div id="main">
 
                 <!-- Post -->
-                    <section class="post">
-                        <header class="major">
-                            <h1>Large Vision Model for Quadruped Locomotion</h1>
-                            <p>Employing Large Vision Model (analogous to Large Language Model) to control robot dog to enhance its obstacle avoidance capability while enabling it to traverse various types of terrains.</p>
-                        </header>
-                        <div class="video">
-                            <video width="1280" height="720" autoplay muted loop>
-                                <source src="images/bg_dog_vid.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </section>
+                <section class="post">
+                    <header class="major">
+                        <h1>Large Vision Model for Quadruped Locomotion</h1>
+                        <p>Employing Large Vision Model (analogous to Large Language Model) to control robot dog to enhance its obstacle avoidance capability while enabling it to traverse various types of terrains.</p>
+                    </header>
+                    <div class="video">
+                        <video width="1280" height="720" autoplay muted loop>
+                            <source src="images/bg_dog_vid.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <h2>Training Pipeline</h2>
+                    <header class="image fit">
+                        <img src="images/dog_train_pipeline.png" alt="" />
+                    </header>
+                    <p>The central component of the control policy is the PPO network, which takes the proprioceptive states of the dog, depth image from camera, remote control commands, gait offset parameters as input during training (similar as deployment) <br>
+                       As shown in the diagram above, Nvidia Isaac Gym is chosen as the physics simulator for its unique compatibility with RL related training. <br> 
+                       A large number of dogs are simulated in paralell to collectively gather trajectory roll-out for the "experience buffer", which will then be sampled to update the PPO network; <br>
+
+                    </p>
+
+                </section>
 
             </div>
 
