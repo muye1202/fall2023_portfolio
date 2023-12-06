@@ -76,6 +76,18 @@
                        the dog will always have joint commands to execute, even during computation delay from large neural networks.
                     </p>
 
+                    <h3>LCM Communication</h3>
+                    <p>
+                        The communication in the deployment is mainly implemented using Light-weight Communication and Marshalling (LCM). For example, LCM is used
+                        when trying to send dog states and RC commands messages from Go1 to Nvidia Jetson Nano; the two hosts are set to be in the same sub-net, thereby
+                        building a message sharing bridge. The sending host needs to instantiate a publisher with a custom LCM message type and publish to a topic; the receiving end needs to subscribe to
+                        the topic and a LCM message handling function needs to be running in a separate thread to process incoming messages.  
+                    </p>
+
+                    <p>The LCM communication allows us to establish message publishing and subscribing mechanisms anywhere in the conventional Python or C++
+                        scripts, avoiding migrating the entire deep learning pipeline to ROS framework.
+                    </p>
+
                 </section>
 
             </div>
