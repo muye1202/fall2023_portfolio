@@ -51,6 +51,35 @@
                         </video>
                     </div>
 
+                    <h2>Deployment Pipeline</h2>
+                    <header class="image fit">
+                        <img src="images/deploy_pipeline.png" alt="" />
+                    </header>
+                    <p>The deployment pipeline we constructed can be used for most of the quadruped projects that use camera images as input. The RL policy takes both the states of the dog and 
+                       the RC Commands as input and these two information needs to be updated in real time, alongside the depth camera image; therefore, two separate processes are run, one on-board 
+                       the Unitree Go1 computer to receive dog states and RC commands, and the other one on an external Nvidia Jetson Nano for performing model inference. This approach ensures that
+                       the dog will always have joint commands to execute, even during computation delay from large neural networks.
+                    </p>
+
+                    <h3>Python Wrapper for Go1 Low-level Control</h3>
+                    <p>I created a Python wrapper for the official Unitree Legged SDK so learning-based robot dog project can easily receive the 
+                       states readings from Go1 and send joint-state actions to the dog using the Python API wrapper. The wrapper is implemented using
+                       Pybind11. 
+                    </p>
+
+
+                    <h3>LCM Communication</h3>
+                    <p>
+                        The communication in the deployment is mainly implemented using Light-weight Communication and Marshalling (LCM). For example, LCM is used
+                        when trying to send dog states and RC commands messages from Go1 to Nvidia Jetson Nano; the two hosts are set to be in the same sub-net, thereby
+                        building a message sharing bridge. The sending host needs to instantiate a publisher with a custom LCM message type and publish to a topic; the receiving end needs to subscribe to
+                        the topic and a LCM message handling function needs to be running in a separate thread to process incoming messages.  
+                    </p>
+
+                    <p>The LCM communication allows us to establish message publishing and subscribing mechanisms anywhere in the conventional Python or C++
+                        scripts, avoiding migrating the entire deep learning pipeline to ROS framework.
+                    </p>
+
                     <h2>Training Pipeline</h2>
                     <header class="image fit">
                         <img src="images/dog_train_pipeline.png" alt="" />
@@ -64,28 +93,6 @@
                     <p>
                         In order to fully utilize the power of large neural network and better distill the visual features in the depth images, we experimented with several models known to have a great
                         performance in processing images: 1. the good old CNN models; 2. the Vision Transformers; 3. and other flavors of transformer-based vision models.
-                    </p>
-
-                    <h2>Deployment Pipeline</h2>
-                    <header class="image fit">
-                        <img src="images/deploy_pipeline.png" alt="" />
-                    </header>
-                    <p>The deployment pipeline we constructed can be used for most of the quadruped projects that use camera images as input. The RL policy takes both the states of the dog and 
-                       the RC Commands as input and these two information needs to be updated in real time, alongside the depth camera image; therefore, two separate processes are run, one on-board 
-                       the Unitree Go1 computer to receive dog states and RC commands, and the other one on an external Nvidia Jetson Nano for performing model inference. This approach ensures that
-                       the dog will always have joint commands to execute, even during computation delay from large neural networks.
-                    </p>
-
-                    <h3>LCM Communication</h3>
-                    <p>
-                        The communication in the deployment is mainly implemented using Light-weight Communication and Marshalling (LCM). For example, LCM is used
-                        when trying to send dog states and RC commands messages from Go1 to Nvidia Jetson Nano; the two hosts are set to be in the same sub-net, thereby
-                        building a message sharing bridge. The sending host needs to instantiate a publisher with a custom LCM message type and publish to a topic; the receiving end needs to subscribe to
-                        the topic and a LCM message handling function needs to be running in a separate thread to process incoming messages.  
-                    </p>
-
-                    <p>The LCM communication allows us to establish message publishing and subscribing mechanisms anywhere in the conventional Python or C++
-                        scripts, avoiding migrating the entire deep learning pipeline to ROS framework.
                     </p>
 
                 </section>
