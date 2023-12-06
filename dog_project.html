@@ -66,6 +66,16 @@
                         performance in processing images: 1. the good old CNN models; 2. the Vision Transformers; 3. and other flavors of transformer-based vision models.
                     </p>
 
+                    <h2>Deployment Pipeline</h2>
+                    <header class="image fit">
+                        <img src="images/deploy_pipeline.png" alt="" />
+                    </header>
+                    <p>The deployment pipeline we constructed can be used for most of the quadruped projects that use camera images as input. The RL policy takes both the states of the dog and 
+                       the RC Commands as input and these two information needs to be updated in real time, alongside the depth camera image; therefore, two separate processes are run, one on-board 
+                       the Unitree Go1 computer to receive dog states and RC commands, and the other one on an external Nvidia Jetson Nano for performing model inference. This approach ensures that
+                       the dog will always have joint commands to execute, even during computation delay from large neural networks.
+                    </p>
+
                 </section>
 
             </div>
