@@ -42,56 +42,39 @@
                 <!-- Post -->
                 <section class="post">
                     <header class="major">
-                        <h1>Large Vision Model for Quadruped Locomotion</h1>
-                        <p>Employing Large Vision Model (analogous to Large Language Model) to control robot dog to enhance its obstacle avoidance capability while enabling it to traverse various types of terrains.</p>
+                        <h1>Reinforcement Learning for Adversarial Robot Soccer</h1>
+                        <p>
+                            Applying RL algorithms to teach two teams of turtlebots how to play soccer--by letting two teams compete against each other.
+                        </p>
                     </header>
                     <div class="video">
                         <video width="1280" height="720" autoplay muted loop>
-                            <source src="images/bg_dog_vid.mp4" type="video/mp4">
+                            <source src="images/successful_defender.mp4" type="video/mp4">
                         </video>
                     </div>
 
-                    <h2>Deployment Pipeline</h2>
-                    <header class="image fit">
-                        <img src="images/deploy_pipeline.png" alt="" />
-                    </header>
-                    <p>The deployment pipeline we constructed can be used for most of the quadruped projects that use camera images as input. The RL policy takes both the states of the dog and 
-                       the RC Commands as input and these two information needs to be updated in real time, alongside the depth camera image; therefore, two separate processes are run, one on-board 
-                       the Unitree Go1 computer to receive dog states and RC commands, and the other one on an external Nvidia Jetson Nano for performing model inference. This approach ensures that
-                       the dog will always have joint commands to execute, even during computation delay from large neural networks.
-                    </p>
-
-                    <h3>Python Wrapper for Go1 Low-level Control</h3>
-                    <p>I created a Python wrapper for the official Unitree Legged SDK so learning-based robot dog project can easily receive the 
-                       states readings from Go1 and send joint-state actions to the dog using the Python API wrapper. The wrapper is implemented using
-                       Pybind11. 
-                    </p>
-
-                    <h3>LCM Communication</h3>
-                    <p>
-                        The communication in the deployment is mainly implemented using Light-weight Communication and Marshalling (LCM). For example, LCM is used
-                        when trying to send dog states and RC commands messages from Go1 to Nvidia Jetson Nano; the two hosts are set to be in the same sub-net, thereby
-                        building a message sharing bridge. The sending host needs to instantiate a publisher with a custom LCM message type and publish to a topic; the receiving end needs to subscribe to
-                        the topic and a LCM message handling function needs to be running in a separate thread to process incoming messages.  
-                    </p>
-
-                    <p>The LCM communication allows us to establish message publishing and subscribing mechanisms anywhere in the conventional Python or C++
-                        scripts, avoiding migrating the entire deep learning pipeline to ROS framework.
-                    </p>
-
                     <h2>Training Pipeline</h2>
                     <header class="image fit">
-                        <img src="images/dog_train_pipeline.png" alt="" />
+                        <img src="images/soccer_pipeline.png" alt="" />
                     </header>
-                    <p>The central component of the control policy is the PPO network, which takes the proprioceptive states of the dog, depth image from camera, remote control commands, gait offset parameters as input during training (similar as deployment)
-                       As shown in the diagram above, Nvidia Isaac Gym is chosen as the physics simulator for its unique compatibility with RL related training.
-                       A large number of dogs are simulated in paralell to collectively gather trajectory roll-out for the "experience buffer", which will then be sampled to update the PPO network.
+                    <p>
+                        The training pipeline for individual soccer player is straight-forward. I built a ROS2 physics simulator that simulates the interaction between the
+                        robot and the soccer, and the robot against its opponent or teammates. The DDPG RL algorithm is updated by sampling collected experience tuple 
+                        composed of actions, rewards, and previous plus current states.
                     </p>
 
-                    <h3>Visual Encoder</h3>
+                    <h3>Training Attacker</h3>
+                    <div class="video">
+                        <video width="1280" height="720" autoplay muted loop>
+                            <source src="images/naive_attacker.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <p>
-                        In order to fully utilize the power of large neural network and better distill the visual features in the depth images, we experimented with several models known to have a great
-                        performance in processing images: 1. the good old CNN models; 2. the Vision Transformers; 3. and other flavors of transformer-based vision models.
+                        I trained the naive attacker first and then proceed to train a defender, and then continue this cycle multiple times
+                        to make both the attacker and defender more sophisticated. The naive attacker's goal is simple--dribble the ball through the 
+                        opening at the other end of the field. I gave the robot reward for each step towards the goal without taking it outside the field,
+                        and punish the agent when the ball is out of field or taken to a wrong direction. The robot is given different starting positions
+                        at each reset so it will know how to attack no matter its current positions.
                     </p>
 
                 </section>
