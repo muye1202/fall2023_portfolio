@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Robot Dog Project</title>
+		<title>RL Robot Soccer Project</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -75,6 +75,18 @@
                         opening at the other end of the field. I gave the robot reward for each step towards the goal without taking it outside the field,
                         and punish the agent when the ball is out of field or taken to a wrong direction. The robot is given different starting positions
                         at each reset so it will know how to attack no matter its current positions.
+                    </p>
+
+                    <h3>Training the Defender</h3>
+                    <p>
+                        After training the attacker, I proceed to train a defender that can tackle the ball from the attacker. The attacker is controlled 
+                        by the trained model, while the defender's control network is being trained from scratch.
+                    </p>
+
+                    <h3>ROS2 Simulator</h3>
+                    <p>
+                        To visualize the training process and evaluate the trained model, I created this physics simulator based on ROS2 that features
+                        basic ball physics (velocity decay included). The turtlebot robot models receive speed, direction, kicking power, and kicking direction. 
                     </p>
 
                 </section>
