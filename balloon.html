@@ -53,14 +53,18 @@
                         </video>
                     </div>
 
-                    <h2>Balloon Position Prediction</h2>
+                    <header class="image fit">
+                        <img src="images/balloon_pipeline.png" alt="" />
+                    </header>
+
+                    <h2>Balloon Trajectory Prediction</h2>
                     <p>
                         To successfully catch the balloon, I implemented a robust position prediction algorithm that predicts the balloon's trajectory
                         in 3D space, and the balloon's approximate position is sent to the trajectory planning module, while leaving enough time for
                         motion planning and trajectory execution.
                     </p>
 
-                    <h2>Trajectory Planning and Execution</h2>
+                    <h2>Arm Motion Planning and Execution</h2>
                     <p>
                         The ROS2 node allows users to input target position and orientation for the robot arm end effector, and the planning module
                         based on MoveIt2 package can output an executable pose trajectory which can then be executed by the Franka robot arm.
