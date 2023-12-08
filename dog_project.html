@@ -42,12 +42,31 @@
                 <!-- Post -->
                 <section class="post">
                     <header class="major">
-                        <h1>Large Vision Model for Quadruped Locomotion</h1>
-                        <p>Employing Large Vision Model (analogous to Large Language Model) to control robot dog to enhance its obstacle avoidance capability while enabling it to traverse various types of terrains.</p>
+                        <h1>Training and Deployment Pipeline for Learning Quadruped Motion</h1>
+                        <p>Training and deploying visuomotor RL model for robot dog control to enhance its mobility.</p>
                     </header>
+                    
+                    <h2>Task Videos</h2>
+                    <p>
+                        One single visuomotor RL policy (the realsense camera is out of frame) enables the Unitree GO1 robot dog to 
+                        complete different tasks that cannot be accomplished by Unitree's official low-level controller, as shown below. 
+                    </p>
+                    <h3>Adjust Its Height To Go Through Obstacles</h3>
                     <div class="video">
                         <video width="1280" height="720" autoplay muted loop>
-                            <source src="images/bg_dog_vid.mp4" type="video/mp4">
+                            <source src="images/under_table.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <h3>Four Modes of Gaits</h3>
+                    <div class="video">
+                        <video width="1280" height="720" autoplay muted loop>
+                            <source src="images/modes_with_subtitles.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <h3>Traverse Uneven Terrain</h3>
+                    <div class="video">
+                        <video width="1280" height="720" autoplay muted loop>
+                            <source src="images/traversing_uneven.mp4" type="video/mp4">
                         </video>
                     </div>
 
