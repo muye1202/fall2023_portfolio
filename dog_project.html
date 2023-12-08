@@ -110,7 +110,19 @@
                     <h3>Visual Encoder</h3>
                     <p>
                         In order to fully utilize the power of large neural network and better distill the visual features in the depth images, we experimented with several models known to have a great
-                        performance in processing images: 1. the good old CNN models; 2. the Vision Transformers; 3. and other flavors of transformer-based vision models.
+                        performance in processing images: 1. the good old CNN models; 2. the Vision Transformers.
+                    </p>
+
+                    <h3>Featured Training Statistics</h3>
+                    <header class="image fit">
+                        <img src="images/training_stats.png" alt="" />
+                    </header>
+                    <p>
+                        Here we show three important training statistics that gives us insight to the quadruped's learning curve. The reward in the first (leftmost) graph
+                        measures how well the robot dog is tracking desired leg swing patterns--higher reward means the dog's leg swing is more realistic, enabling it to 
+                        move with desired styles; the second graph shows that the smoothness of the dog's action is improving as training iterations progress; the third graph
+                        describes how well the dog is tracking the desired foot-contact schedule--higher reward signifies that the dog is learning to do foot placement in a more
+                        realistic frequency.
                     </p>
 
                 </section>
